@@ -1,29 +1,23 @@
-N, r, c = map(int, input().split())
+import sys
 
-ans = 0
+N,R,C = map(int,sys.stdin.readline().split())
 
-while N != 0:
+result = 0
 
-	N -= 1
+def z(n,r,c):
+    global result
 
-	
-	if r < 2 ** N and c < 2 ** N:
-		ans += ( 2 ** N ) * ( 2 ** N ) * 0
-
-	
-	elif r < 2 ** N and c >= 2 ** N: 
-		ans += ( 2 ** N ) * ( 2 ** N ) * 1
-		c -= ( 2 ** N )
-        
-	    
-	elif r >= 2 ** N and c < 2 ** N: 
-		ans += ( 2 ** N ) * ( 2 ** N ) * 2
-		r -= ( 2 ** N )
-        
-	  
-	else:
-		ans += ( 2 ** N ) * ( 2 ** N ) * 3
-		r -= ( 2 ** N )
-		c -= ( 2 ** N )
+    if r==R and c==C:
+        print(result)
+        exit(0)
     
-print(ans)
+    if not (r<=R<n+r and c<=C<n+c):
+        result += n*n 
+        return
+    
+    z(n//2,r,c)
+    z(n//2,r,c+n//2)
+    z(n//2,r+n//2,c)
+    z(n//2,r+n//2,c+n//2)
+      
+z(2**N,0,0)
