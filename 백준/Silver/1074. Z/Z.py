@@ -11,7 +11,7 @@ def z(n,r,c):
         print(result)
         exit(0)
     
-    if not (r<=R<n+r and c<=C<n+c):
+    if not (R<n+r and C<n+c):
         result += n*n 
         return
     
