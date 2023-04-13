@@ -1,28 +1,28 @@
+from sys import stdin as s
 import sys
 
-def dfs(start):
+sys.setrecursionlimit(10**6)
+
+
+
+def dfs(start,li):
     global cnt
     
-    if sum(s) ==  b and len(s)>0:
-        cnt+=1    
-    
-    for i in range(start,a):
-            s.append(n_list[i])
-            dfs(i+1)
-            s.pop()
+    if sum(li)==b and len(li)>0:
+        cnt+=1
             
-    return cnt
+    for i in range(start,a):
+        li.append(c[i])
+        dfs(i+1,li)
+        li.pop()
+
+
+if __name__=='__main__':
     
+    a,b = map(int,s.readline().split())
+    c = list(map(int,s.readline().split()))
     
-a,b = map(int,sys.stdin.readline().split())
-
-s = []
-cnt = 0 
-
-
-n_list = list(map(int,sys.stdin.readline().split()))
-    
-
-dfs(0)
-print(cnt)
-
+    cnt =0
+        
+    dfs(0,[])
+    print(cnt)
