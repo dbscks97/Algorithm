@@ -2,35 +2,32 @@ from sys import stdin as s
 from collections import deque
 
 #s = open('input.txt','rt')
-
-
-
+snake = deque([])
 N = int(s.readline())
 K = int(s.readline())
-arr = [[0] * N for _ in range(N)] # 전체 N*N에 0을 넣어준다 , 사과위치는 1
+
+arr = [[0] * N for _ in range(N)]
 
 for i in range(K):
-    apple_x, apple_y = map(int,s.readline().split())
-    arr[apple_x-1][apple_y-1]=1
+    X,Y = map(int,s.readline().split())
+    arr[X-1][Y-1]=1
     
-snake = deque([])
-timeq = deque([])
-
+time_list =deque([])
 L = int(s.readline())
-time_list=[]
 
-# L을 받고 time_list에 값 저장해둠.
 for i in range(L):
-    time_number,time_string = list(map(str,s.readline().split()))
-    timeq.append((time_number, time_string))
-    
-# 동,남,서,북 -> 시계방향으로 이동 
-dx=[0,1,0,-1]
-dy=[1,0,-1,0]
+    time_set, vector = list(map(str,s.readline().split()))
+    time_list.append((time_set,vector))
 
-#초기 x,y,d 값 설정 d가 0일경우 동쪽으로 이동
+
+
+# 동, 남, 서, 북 (시계방향)
+dx = [0,1,0,-1]
+dy = [1,0,-1,0]
+
+# 최초 값 설정
 x,y,d = 0,0,0
-time =0
+time = 0
 
 while True:
     time +=1
@@ -38,26 +35,24 @@ while True:
     
     x += dx[d]
     y += dy[d]
-    
-    
-    # 범위를 벗어나거나 자신의 몸통을 부딪히면 종료
-    if x < 0 or x >= N or y < 0 or y >= N or arr[x][y] == 2:
+        
+    if x<0 or x>=N or y<0 or y>=N or arr[x][y]==2:
         break
     
-    # 다음 x,y에 사과가 없으면 큐에서 왼쪽꺼빼고 0으로 값 넣어줌
     if not arr[x][y]:
-        a,b =snake.popleft()
-        arr[a][b]=0
+        i,j = snake.popleft()
+        arr[i][j] =0
+        
+    arr[x][y] =2
     
-    arr[x][y]=2
-    # print(type(int(timeq[0][0])))
-    if timeq:
-        if time == int(timeq[0][0]):
-            if timeq[0][1] == 'D':
-                d = (d+1)%4
-                timeq.popleft()
-            else:
-                d = (d-1)%4
-                timeq.popleft()
-
+    if time_list:
+        if time == int(time_list[0][0]):
+            if time_list[0][1] =='D':  #D일경우 오른쪽으로 90도 회전
+                d = (d+1) % 4
+                time_list.popleft() 
+            else:                      #D가 아닐경우(L) 왼쪽으로 90도 회전
+                d = (d-1) % 4
+                time_list.popleft()
+        
+     
 print(time)
