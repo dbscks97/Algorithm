@@ -1,5 +1,6 @@
 from sys import stdin as s
-
+import sys
+sys.setrecursionlimit(10**6)
 def dfs(c):
     global cnt
     
