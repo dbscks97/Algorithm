@@ -1,17 +1,15 @@
 from collections import deque
 from sys import stdin as s
 
-
 def dfs(start,end):
     global cnt
     global answer
     v[start]=1
     
     if start==end:
-        answer = cnt
-    
-    
-    
+        print(cnt)
+        exit()
+
     for n in arr[start]:
         if not v[n]:
             v[n]=1
@@ -35,8 +33,5 @@ if __name__=='__main__':
 
     dfs(A,B)
 
-    if answer==0:
-        print(-1)
-    else:
-        print(answer)
     
+    print(-1)
