@@ -1,10 +1,13 @@
 from sys import stdin as s
+N = int(s.readline())
 
-n =int(s.readline())
-dp=[0]*(n+1)
-arr=[0]+list(map(int,s.readline().split()))
+arr =[0] + list(map(int,s.readline().split()))
+dp = [0] * len(arr)
+result = 0
 
-for i in range(1, n+1):
+for i in range(1,N+1):
     for j in range(1,i+1):
-        dp[i] = max(dp[i], arr[j] + dp[i-j])
-print(dp[n])
+        dp[i] = max(dp[i],dp[i-j]+arr[j])
+
+print(dp[N])
+    
