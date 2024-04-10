@@ -23,12 +23,12 @@ public class Main {
 			arr[i][1] = Integer.parseInt(st.nextToken());
 		}
 
-		Arrays.sort(arr, ((o1, o2) -> {
+		Arrays.sort(arr, (o1, o2) -> {
 			if (o1[1] == o2[1]) {
-				return o1[0] - o2[0];
+				return Integer.compare(o1[0], o2[0]);
 			}
-			return o1[1] - o2[1];
-		}));
+			return Integer.compare(o1[1], o2[1]);
+		});
 
 		int answer = 1;
 		int end = arr[0][1];
