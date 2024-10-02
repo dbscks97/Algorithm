@@ -1,8 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.HashMap;
 import java.io.InputStreamReader;
 
 public class Main {
@@ -15,23 +14,21 @@ public class Main {
 
 		for (int i = 0; i < N; i++) {
 			int M = Integer.parseInt(br.readLine());
-			Set<String> phoneNumbers = new TreeSet<>();
+			HashMap<String, Boolean> phoneMap = new HashMap<>();
 			boolean isPrefixFree = true;
 
 			for (int j = 0; j < M; j++) {
 				String phoneNumber = br.readLine();
-				phoneNumbers.add(phoneNumber);
+				phoneMap.put(phoneNumber, true);
 			}
 
-			for (String number : phoneNumbers) {
+			// 접두어 체크
+			for (String number : phoneMap.keySet()) {
 				for (int j = 1; j < number.length(); j++) {
-					if (phoneNumbers.contains(number.substring(0, j))) {
+					if (phoneMap.containsKey(number.substring(0, j))) {
 						isPrefixFree = false;
 						break;
 					}
-				}
-				if (!isPrefixFree) {
-					break;
 				}
 			}
 
